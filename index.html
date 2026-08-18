@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darshan K — SOC Analyst L1/L2 Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1420;
+    --panel:#121B2B;
+    --panel-2:#0F1826;
+    --border:#23324A;
+    --text:#E6EDF3;
+    --muted:#8B98A8;
+    --teal:#4FD1C5;
+    --amber:#E8A33D;
+    --red:#E5533D;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- status bar ---------- */
+  .statusbar{
+    border-bottom:1px solid var(--border);
+    padding:16px 0;
+    position:sticky; top:0;
+    background:rgba(11,20,32,0.92);
+    backdrop-filter:blur(6px);
+    z-index:50;
+  }
+  .statusbar .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  .statusbar .id{font-family:var(--mono); font-size:13px; letter-spacing:0.02em;}
+  .statusbar .id b{color:var(--text);}
+  .statusbar .id span{color:var(--muted);}
+  .links{display:flex; gap:16px; font-family:var(--mono); font-size:12px;}
+  .links a{color:var(--muted); text-decoration:none; border-bottom:1px solid transparent; transition:.15s;}
+  .links a:hover{color:var(--teal); border-bottom-color:var(--teal);}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 40px;}
+  .hero .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--teal);
+    letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 0 rgba(79,209,197,.6); animation:pulse 2s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(79,209,197,.55);}
+    70%{box-shadow:0 0 0 8px rgba(79,209,197,0);}
+    100%{box-shadow:0 0 0 0 rgba(79,209,197,0);}
+  }
+  .hero h1{
+    font-family:var(--mono); font-weight:700;
+    font-size:clamp(28px,4.5vw,42px);
+    line-height:1.25; letter-spacing:-0.01em;
+    margin-bottom:18px; max-width:14ch;
+  }
+  .hero p{color:var(--muted); font-size:16px; max-width:60ch; margin-bottom:10px;}
+  .hero .role{
+    display:inline-block; margin-top:14px;
+    font-family:var(--mono); font-size:12px;
+    border:1px solid var(--border); padding:6px 12px; border-radius:4px;
+    color:var(--amber);
+  }
+
+  /* ---------- section headers ---------- */
+  section{padding:48px 0;}
+  .sec-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:22px; border-bottom:1px solid var(--border); padding-bottom:12px;
+  }
+  .sec-head h2{
+    font-family:var(--mono); font-size:14px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--text);
+  }
+  .sec-head .count{font-family:var(--mono); font-size:12px; color:var(--muted);}
+
+  /* ---------- activity feed (signature element) ---------- */
+  .feed{
+    background:var(--panel); border:1px solid var(--border); border-radius:6px;
+    overflow:hidden;
+  }
+  .feed-row{
+    display:flex; gap:14px; align-items:baseline;
+    padding:12px 16px; font-family:var(--mono); font-size:12.5px;
+    border-bottom:1px solid var(--border);
+  }
+  .feed-row:last-child{border-bottom:none;}
+  .feed-row .ts{color:var(--muted); white-space:nowrap;}
+  .feed-row .tag{
+    padding:1px 7px; border-radius:3px; font-size:10.5px; font-weight:600;
+    white-space:nowrap; letter-spacing:0.03em;
+  }
+  .tag.new{background:rgba(79,209,197,.12); color:var(--teal); border:1px solid rgba(79,209,197,.3);}
+  .tag.plan{background:rgba(232,163,61,.12); color:var(--amber); border:1px solid rgba(232,163,61,.3);}
+  .feed-row .desc{color:var(--text);}
+
+  /* ---------- case files (projects) ---------- */
+  .case{
+    background:var(--panel); border:1px solid var(--border); border-radius:6px;
+    padding:22px; margin-bottom:16px;
+  }
+  .case-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; margin-bottom:10px;}
+  .case-id{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:0.05em;}
+  .case h3{font-size:18px; font-weight:600; margin-top:4px;}
+  .status-pill{
+    font-family:var(--mono); font-size:10.5px; padding:3px 9px; border-radius:3px;
+    white-space:nowrap; height:fit-content; font-weight:600; letter-spacing:0.03em;
+  }
+  .status-pill.verified{background:rgba(79,209,197,.12); color:var(--teal); border:1px solid rgba(79,209,197,.3);}
+  .case .summary{color:var(--muted); font-size:14.5px; margin-bottom:14px;}
+  .case-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+  @media(max-width:600px){.case-grid{grid-template-columns:1fr;}}
+  .case-block h4{
+    font-family:var(--mono); font-size:10.5px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;
+  }
+  .case-block p, .case-block ul{font-size:13.5px; color:var(--text);}
+  .case-block ul{padding-left:16px;}
+  .metrics{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:14px; padding:12px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .metric{font-family:var(--mono);}
+  .metric .num{font-size:19px; font-weight:700; color:var(--teal);}
+  .metric .label{font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;}
+  .mitre-tags{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+  .mitre-tag{
+    font-family:var(--mono); font-size:11px; padding:3px 8px; border-radius:3px;
+    background:rgba(229,83,61,.1); color:#f0806c; border:1px solid rgba(229,83,61,.28);
+  }
+  .case-footer a{
+    font-family:var(--mono); font-size:12px; color:var(--teal); text-decoration:none;
+    border-bottom:1px solid rgba(79,209,197,.35);
+  }
+  .case-footer a:hover{border-bottom-color:var(--teal);}
+
+  /* ---------- placeholder sections ---------- */
+  .placeholder{
+    background:var(--panel-2); border:1px dashed var(--border); border-radius:6px;
+    padding:26px; text-align:left; color:var(--muted); font-size:13.5px;
+  }
+  .placeholder .ph-title{font-family:var(--mono); color:var(--amber); font-size:12px; margin-bottom:8px; letter-spacing:0.03em;}
+
+  /* ---------- footer ---------- */
+  footer{padding:48px 0 70px; border-top:1px solid var(--border); margin-top:20px;}
+  footer .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;}
+  footer h4{font-family:var(--mono); font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:0.08em; margin-bottom:10px;}
+  footer .certs{font-size:13px; color:var(--text); line-height:1.9;}
+  .resume-btn{
+    display:inline-block; font-family:var(--mono); font-size:13px; font-weight:600;
+    background:var(--teal); color:#08161A; padding:10px 18px; border-radius:4px;
+    text-decoration:none; margin-top:4px;
+  }
+  footer .contact{font-family:var(--mono); font-size:12.5px; color:var(--muted); line-height:1.9;}
+  footer .contact a{color:var(--text); text-decoration:none;}
+
+  .reveal{opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease;}
+  .reveal.show{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="wrap">
+    <div class="id"><b>DARSHAN K</b> <span>/ SOC-PORTFOLIO / status: active</span></div>
+    <div class="links">
+      <a href="https://github.com/MIKEYSAN040" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/darshank404" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@darshan331740_89257" target="_blank">Medium</a>
+      <a href="https://tryhackme.com/p/Darshan331740" target="_blank">TryHackMe</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> LOG ACTIVE — updated as work progresses</div>
+    <h1>SOC-focused security analyst, building detections in the open.</h1>
+    <p>Cybersecurity graduate with hands-on SOC investigation experience — Splunk, Elastic, Microsoft Defender for O365, Sysmon, Wireshark — plus independent detection-engineering projects mapped to MITRE ATT&CK. Every case file below includes the detection logic and a link to the code, not just a claim.</p>
+    <span class="role">TARGETING: SOC ANALYST L1/L2 · OPEN TO RELOCATION</span>
+  </section>
+
+  <section id="feed-section">
+    <div class="sec-head"><h2>Recent Activity</h2><span class="count" id="feed-count"></span></div>
+    <div class="feed reveal" id="feed"></div>
+  </section>
+
+  <section id="cases-section">
+    <div class="sec-head"><h2>Case Files — Detection Projects</h2><span class="count" id="case-count"></span></div>
+    <div id="cases"></div>
+  </section>
+
+  <section id="rules-section">
+    <div class="sec-head"><h2>Detection Rules</h2></div>
+    <div class="placeholder reveal">
+      <div class="ph-title">IN PROGRESS</div>
+      Sigma rules go here as they're written — one entry per rule with the trigger logic and a link to the raw rule file. First rule lands soon; check the activity feed above for the latest addition.
+    </div>
+  </section>
+
+  <section id="hunts-section">
+    <div class="sec-head"><h2>Threat Hunt Reports</h2></div>
+    <div class="placeholder reveal">
+      <div class="ph-title">IN PROGRESS</div>
+      Structured hunt reports (hypothesis → hunting query → findings → recommendations) will be added here as they're completed.
+    </div>
+  </section>
+
+  <section id="lab-section">
+    <div class="sec-head"><h2>SOC Home Lab</h2></div>
+    <div class="placeholder reveal">
+      <div class="ph-title">IN PROGRESS</div>
+      Documentation of the Splunk + Splunk Security Essentials + BOTS v3 home lab — architecture, data sources, and triage workflow — will be added here.
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <h4>Resume</h4>
+      <a class="resume-btn" href="#" id="resume-link">Download PDF ↓</a>
+    </div>
+    <div>
+      <h4>Certifications</h4>
+      <div class="certs" id="certs"></div>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <div class="contact">
+        Karnataka, India<br>
+        <a href="https://linkedin.com/in/darshank404" target="_blank">linkedin.com/in/darshank404</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================================
+   EDIT ZONE — everything below is the site's content.
+   To add new work: copy a block inside the matching array and fill it in.
+   Save the file and refresh the browser — no build step needed.
+   ========================================================================= */
+
+const ACTIVITY = [
+  // Newest first. type: "new" or "plan"
+  { date:"2026-08-18", type:"new",  text:"Portfolio site launched — 4 case files live" },
+  { date:"2026-08-18", type:"plan", text:"Next up: first Sigma detection rule" },
+];
+
+const CASES = [
+  {
+    id:"CASE-001",
+    title:"Enterprise Windows Log Analyzer",
+    status:"Verified",
+    summary:"Windows Event Log analysis tool detecting brute-force logins, persistence mechanisms, privilege escalation, and LOLBin execution.",
+    tools:["Python","python-evtx","OpenPyXL"],
+    scenario:"Parsed Security, System, and Sysmon logs from the EVTX-ATTACK-SAMPLES public dataset to identify malicious activity and generate investigation-ready findings.",
+    detection:"Signature + behavior-based rules across Security/System/Sysmon channels, flagging brute-force patterns, registry/scheduled-task persistence, and suspicious LOLBin (mshta/regsvr32/wscript) execution.",
+    metrics:[
+      {num:"75%", label:"True positive rate (9/12)"},
+      {num:"0%", label:"False positives"},
+      {num:"3", label:"Coverage gaps documented"}
+    ],
+    mitre:["T1110","T1547","T1218"],
+    link:"https://github.com/MIKEYSAN040"
+  },
+  {
+    id:"CASE-002",
+    title:"Cloud Access Privilege Auditor",
+    status:"Verified",
+    summary:"IAM privilege auditor for AWS environments — flags over-privileged and risky accounts against least-privilege baselines.",
+    tools:["Boto3","Flask","AWS EC2","OpenPyXL"],
+    scenario:"Deployed on AWS EC2 (ap-southeast-2, t3.micro) against a 200-user synthetic IAM organization to simulate a real cloud access review.",
+    detection:"Classifies IAM accounts by risk tier based on privilege scope, unused permissions, and policy attachment patterns; outputs a prioritized remediation list.",
+    metrics:[
+      {num:"95%", label:"Classification accuracy"},
+      {num:"10", label:"Critical/High accounts flagged"}
+    ],
+    mitre:["T1078","T1098","T1530","T1556"],
+    link:"https://github.com/MIKEYSAN040/cloud-access-privilege-auditor"
+  },
+  {
+    id:"CASE-003",
+    title:"Identity Threat Detection System",
+    status:"Verified",
+    summary:"Detects identity-based attack patterns across AWS CloudTrail logs with a live dashboard.",
+    tools:["Boto3","Flask","Pandas","Chart.js"],
+    scenario:"Built to catch identity misuse patterns (impossible travel, privilege abuse, anomalous API activity) that traditional signature rules miss.",
+    detection:"5 correlated detection patterns across CloudTrail events, visualized on a Chart.js dashboard for analyst triage.",
+    metrics:[
+      {num:"100%", label:"Recall on synthetic dataset"},
+      {num:"0", label:"False positives"}
+    ],
+    mitre:["T1078","T1098"],
+    link:"https://github.com/MIKEYSAN040/identity-threat-detection"
+  },
+  {
+    id:"CASE-004",
+    title:"Network Traffic Anomaly Detector",
+    status:"Verified",
+    summary:"Packet-level detector for reconnaissance and C2 activity from PCAP captures — port scans, ARP spoofing, SYN floods, beaconing.",
+    tools:["Scapy","OpenPyXL"],
+    scenario:"Built to extract IOCs (IPs, ports, protocols, MAC addresses) from PCAP captures to support incident investigations, without relying on a commercial NDR tool.",
+    detection:"Signature logic for 4 attack classes: port scans, ARP spoofing, SYN floods, and C2 beaconing intervals.",
+    metrics:[
+      {num:"4/4", label:"Attack classes detected"},
+      {num:"0", label:"False positives (150+ normal sessions)"}
+    ],
+    mitre:["T1046","T1557.002","T1498.001","T1071"],
+    link:"https://github.com/MIKEYSAN040"
+  }
+];
+
+const CERTS = [
+  "Networking Basics — Cisco Networking Academy",
+  "Microsoft Security Essentials — LinkedIn Learning",
+  "Splunk for Security Analytics and Monitoring — LinkedIn Learning",
+  "Technical Intro to Cybersecurity (NSE-1 & NSE-2) — Fortinet"
+];
+
+const RESUME_URL = "#"; // replace with a hosted PDF link once you have one
+
+/* ===================== render engine — no need to edit below ===================== */
+
+function fmtDate(d){
+  const dt = new Date(d + "T00:00:00");
+  return dt.toLocaleDateString('en-US', {month:'short', day:'2-digit', year:'numeric'}).toUpperCase();
+}
+
+function renderFeed(){
+  const feed = document.getElementById('feed');
+  document.getElementById('feed-count').textContent = ACTIVITY.length + ' entries';
+  feed.innerHTML = ACTIVITY.map(a => `
+    <div class="feed-row">
+      <span class="ts">${fmtDate(a.date)}</span>
+      <span class="tag ${a.type}">${a.type === 'new' ? 'NEW' : 'PLANNED'}</span>
+      <span class="desc">${a.text}</span>
+    </div>
+  `).join('');
+}
+
+function renderCases(){
+  const el = document.getElementById('cases');
+  document.getElementById('case-count').textContent = CASES.length + ' cases';
+  el.innerHTML = CASES.map(c => `
+    <div class="case reveal">
+      <div class="case-top">
+        <div>
+          <div class="case-id">${c.id}</div>
+          <h3>${c.title}</h3>
+        </div>
+        <span class="status-pill verified">${c.status.toUpperCase()}</span>
+      </div>
+      <p class="summary">${c.summary}</p>
+      <div class="case-grid">
+        <div class="case-block">
+          <h4>Tools</h4>
+          <p>${c.tools.join(' · ')}</p>
+        </div>
+        <div class="case-block">
+          <h4>Scenario</h4>
+          <p>${c.scenario}</p>
+        </div>
+      </div>
+      <div class="case-block" style="margin-bottom:14px;">
+        <h4>Detection Logic</h4>
+        <p>${c.detection}</p>
+      </div>
+      <div class="metrics">
+        ${c.metrics.map(m => `<div class="metric"><div class="num">${m.num}</div><div class="label">${m.label}</div></div>`).join('')}
+      </div>
+      <div class="mitre-tags">
+        ${c.mitre.map(t => `<span class="mitre-tag">${t}</span>`).join('')}
+      </div>
+      <div class="case-footer"><a href="${c.link}" target="_blank">View code on GitHub →</a></div>
+    </div>
+  `).join('');
+}
+
+function renderCerts(){
+  document.getElementById('certs').innerHTML = CERTS.map(c => `${c}<br>`).join('');
+}
+
+function renderResume(){
+  document.getElementById('resume-link').href = RESUME_URL;
+}
+
+renderFeed();
+renderCases();
+renderCerts();
+renderResume();
+
+// scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+// case cards are injected after page load — observe them too
+setTimeout(() => document.querySelectorAll('.case').forEach(el => { el.classList.add('reveal'); io.observe(el); }), 0);
+</script>
+</body>
+</html>
