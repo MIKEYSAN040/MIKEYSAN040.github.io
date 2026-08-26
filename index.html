@@ -32,7 +32,6 @@
   a{color:inherit;}
   .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
 
-  /* ---------- status bar ---------- */
   .statusbar{
     border-bottom:1px solid var(--border);
     padding:16px 0;
@@ -49,7 +48,6 @@
   .links a{color:var(--muted); text-decoration:none; border-bottom:1px solid transparent; transition:.15s;}
   .links a:hover{color:var(--teal); border-bottom-color:var(--teal);}
 
-  /* ---------- hero ---------- */
   .hero{padding:64px 0 40px;}
   .hero .eyebrow{
     font-family:var(--mono); font-size:12px; color:var(--teal);
@@ -76,7 +74,6 @@
     color:var(--amber);
   }
 
-  /* ---------- section headers ---------- */
   section{padding:48px 0;}
   .sec-head{
     display:flex; align-items:baseline; justify-content:space-between;
@@ -88,7 +85,6 @@
   }
   .sec-head .count{font-family:var(--mono); font-size:12px; color:var(--muted);}
 
-  /* ---------- activity feed (signature element) ---------- */
   .feed{
     background:var(--panel); border:1px solid var(--border); border-radius:6px;
     overflow:hidden;
@@ -108,7 +104,6 @@
   .tag.plan{background:rgba(232,163,61,.12); color:var(--amber); border:1px solid rgba(232,163,61,.3);}
   .feed-row .desc{color:var(--text);}
 
-  /* ---------- case files (projects) ---------- */
   .case{
     background:var(--panel); border:1px solid var(--border); border-radius:6px;
     padding:22px; margin-bottom:16px;
@@ -130,10 +125,27 @@
   }
   .case-block p, .case-block ul{font-size:13.5px; color:var(--text);}
   .case-block ul{padding-left:16px;}
-  .metrics{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:14px; padding:12px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
-  .metric{font-family:var(--mono);}
-  .metric .num{font-size:19px; font-weight:700; color:var(--teal);}
-  .metric .label{font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;}
+
+  .callout{
+    border-radius:4px; padding:12px 14px; margin-bottom:12px; font-size:13.5px;
+    border-left:3px solid var(--border);
+  }
+  .callout.finding{background:rgba(79,209,197,.06); border-left-color:var(--teal);}
+  .callout.improve{background:rgba(232,163,61,.06); border-left-color:var(--amber);}
+  .callout .clabel{
+    font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.08em;
+    display:block; margin-bottom:4px;
+  }
+  .callout.finding .clabel{color:var(--teal);}
+  .callout.improve .clabel{color:var(--amber);}
+  .callout p{color:var(--text); font-size:13.5px;}
+
+  .skill-tags{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+  .skill-tag{
+    font-family:var(--mono); font-size:11px; padding:3px 8px; border-radius:3px;
+    background:rgba(230,237,243,.06); color:var(--text); border:1px solid var(--border);
+  }
+
   .mitre-tags{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
   .mitre-tag{
     font-family:var(--mono); font-size:11px; padding:3px 8px; border-radius:3px;
@@ -145,7 +157,6 @@
   }
   .case-footer a:hover{border-bottom-color:var(--teal);}
 
-  /* ---------- rules table ---------- */
   .tactic-group{margin-bottom:18px;}
   .tactic-label{
     font-family:var(--mono); font-size:11px; color:var(--amber);
@@ -166,14 +177,12 @@
     border-bottom:1px solid rgba(79,209,197,.35); display:inline-block; margin-top:10px;
   }
 
-  /* ---------- placeholder sections ---------- */
   .placeholder{
     background:var(--panel-2); border:1px dashed var(--border); border-radius:6px;
     padding:26px; text-align:left; color:var(--muted); font-size:13.5px;
   }
   .placeholder .ph-title{font-family:var(--mono); color:var(--amber); font-size:12px; margin-bottom:8px; letter-spacing:0.03em;}
 
-  /* ---------- footer ---------- */
   footer{padding:48px 0 70px; border-top:1px solid var(--border); margin-top:20px;}
   footer .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;}
   footer h4{font-family:var(--mono); font-size:11px; text-transform:uppercase; color:var(--muted); letter-spacing:0.08em; margin-bottom:10px;}
@@ -290,7 +299,9 @@ const CASES = [
     tools:["Python","python-evtx","OpenPyXL"],
     scenario:"Parsed Security, System, and Sysmon logs from the EVTX-ATTACK-SAMPLES public dataset to identify malicious activity and generate investigation-ready findings.",
     detection:"Signature + behavior-based rules across Security/System/Sysmon channels, flagging brute-force patterns, registry/scheduled-task persistence, and suspicious LOLBin (mshta/regsvr32/wscript) execution.",
-  
+    finding:"FILL IN: one real, specific thing you observed running this — e.g. a particular event it caught, or a gap it revealed.",
+    improve:"FILL IN: one honest limitation and what you'd change with more time.",
+    skills:["Log Parsing","EVTX Analysis","Detection Logic Design"],
     mitre:["T1110","T1547","T1218"],
     link:"https://github.com/MIKEYSAN040"
   },
@@ -302,7 +313,9 @@ const CASES = [
     tools:["Boto3","Flask","AWS EC2","OpenPyXL"],
     scenario:"Deployed on AWS EC2 (ap-southeast-2, t3.micro) against a 200-user synthetic IAM organization to simulate a real cloud access review.",
     detection:"Classifies IAM accounts by risk tier based on privilege scope, unused permissions, and policy attachment patterns; outputs a prioritized remediation list.",
-   
+    finding:"FILL IN: a specific account or pattern the audit actually surfaced.",
+    improve:"FILL IN: one honest limitation and what you'd change with more time.",
+    skills:["IAM Policy Analysis","Least-Privilege Review","AWS Boto3"],
     mitre:["T1078","T1098","T1530","T1556"],
     link:"https://github.com/MIKEYSAN040/cloud-access-privilege-auditor"
   },
@@ -314,7 +327,9 @@ const CASES = [
     tools:["Boto3","Flask","Pandas","Chart.js"],
     scenario:"Built to catch identity misuse patterns (impossible travel, privilege abuse, anomalous API activity) that traditional signature rules miss.",
     detection:"5 correlated detection patterns across CloudTrail events, visualized on a Chart.js dashboard for analyst triage.",
- 
+    finding:"FILL IN: a specific pattern the dashboard actually flagged during testing.",
+    improve:"FILL IN: one honest limitation and what you'd change with more time.",
+    skills:["CloudTrail Analysis","Anomaly Detection Logic","Dashboarding"],
     mitre:["T1078","T1098"],
     link:"https://github.com/MIKEYSAN040/identity-threat-detection"
   },
@@ -326,7 +341,9 @@ const CASES = [
     tools:["Scapy","OpenPyXL"],
     scenario:"Built to extract IOCs (IPs, ports, protocols, MAC addresses) from PCAP captures to support incident investigations, without relying on a commercial NDR tool.",
     detection:"Signature logic for 4 attack classes: port scans, ARP spoofing, SYN floods, and C2 beaconing intervals.",
-   
+    finding:"FILL IN: a specific IOC or session the tool actually pulled out of a capture.",
+    improve:"FILL IN: one honest limitation and what you'd change with more time.",
+    skills:["Packet Analysis","IOC Extraction","Scapy"],
     mitre:["T1046","T1557.002","T1498.001","T1071"],
     link:"https://github.com/MIKEYSAN040"
   }
@@ -404,9 +421,23 @@ function renderCases(){
         <h4>Detection Logic</h4>
         <p>${c.detection}</p>
       </div>
-      <div class="metrics">
-        ${c.metrics.map(m => `<div class="metric"><div class="num">${m.num}</div><div class="label">${m.label}</div></div>`).join('')}
-      </div>
+      ${c.finding ? `
+      <div class="callout finding">
+        <span class="clabel">Key Finding</span>
+        <p>${c.finding}</p>
+      </div>` : ''}
+      ${c.improve ? `
+      <div class="callout improve">
+        <span class="clabel">What I'd Improve</span>
+        <p>${c.improve}</p>
+      </div>` : ''}
+      ${c.skills ? `
+      <div class="case-block" style="margin-bottom:10px;">
+        <h4>Skills Demonstrated</h4>
+        <div class="skill-tags">
+          ${c.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+        </div>
+      </div>` : ''}
       <div class="mitre-tags">
         ${c.mitre.map(t => `<span class="mitre-tag">${t}</span>`).join('')}
       </div>
@@ -451,12 +482,10 @@ renderRules();
 renderCerts();
 renderResume();
 
-// scroll reveal
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
 }, {threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-// case cards are injected after page load — observe them too
 setTimeout(() => document.querySelectorAll('.case').forEach(el => { el.classList.add('reveal'); io.observe(el); }), 0);
 </script>
 </body>
