@@ -290,11 +290,7 @@ const CASES = [
     tools:["Python","python-evtx","OpenPyXL"],
     scenario:"Parsed Security, System, and Sysmon logs from the EVTX-ATTACK-SAMPLES public dataset to identify malicious activity and generate investigation-ready findings.",
     detection:"Signature + behavior-based rules across Security/System/Sysmon channels, flagging brute-force patterns, registry/scheduled-task persistence, and suspicious LOLBin (mshta/regsvr32/wscript) execution.",
-    metrics:[
-      {num:"75%", label:"True positive rate (9/12)"},
-      {num:"0%", label:"False positives"},
-      {num:"3", label:"Coverage gaps documented"}
-    ],
+  
     mitre:["T1110","T1547","T1218"],
     link:"https://github.com/MIKEYSAN040"
   },
@@ -306,10 +302,7 @@ const CASES = [
     tools:["Boto3","Flask","AWS EC2","OpenPyXL"],
     scenario:"Deployed on AWS EC2 (ap-southeast-2, t3.micro) against a 200-user synthetic IAM organization to simulate a real cloud access review.",
     detection:"Classifies IAM accounts by risk tier based on privilege scope, unused permissions, and policy attachment patterns; outputs a prioritized remediation list.",
-    metrics:[
-      {num:"95%", label:"Classification accuracy"},
-      {num:"10", label:"Critical/High accounts flagged"}
-    ],
+   
     mitre:["T1078","T1098","T1530","T1556"],
     link:"https://github.com/MIKEYSAN040/cloud-access-privilege-auditor"
   },
@@ -321,10 +314,7 @@ const CASES = [
     tools:["Boto3","Flask","Pandas","Chart.js"],
     scenario:"Built to catch identity misuse patterns (impossible travel, privilege abuse, anomalous API activity) that traditional signature rules miss.",
     detection:"5 correlated detection patterns across CloudTrail events, visualized on a Chart.js dashboard for analyst triage.",
-    metrics:[
-      {num:"100%", label:"Recall on synthetic dataset"},
-      {num:"0", label:"False positives"}
-    ],
+ 
     mitre:["T1078","T1098"],
     link:"https://github.com/MIKEYSAN040/identity-threat-detection"
   },
@@ -336,10 +326,7 @@ const CASES = [
     tools:["Scapy","OpenPyXL"],
     scenario:"Built to extract IOCs (IPs, ports, protocols, MAC addresses) from PCAP captures to support incident investigations, without relying on a commercial NDR tool.",
     detection:"Signature logic for 4 attack classes: port scans, ARP spoofing, SYN floods, and C2 beaconing intervals.",
-    metrics:[
-      {num:"4/4", label:"Attack classes detected"},
-      {num:"0", label:"False positives (150+ normal sessions)"}
-    ],
+   
     mitre:["T1046","T1557.002","T1498.001","T1071"],
     link:"https://github.com/MIKEYSAN040"
   }
