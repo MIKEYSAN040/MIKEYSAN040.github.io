@@ -145,6 +145,27 @@
   }
   .case-footer a:hover{border-bottom-color:var(--teal);}
 
+  /* ---------- rules table ---------- */
+  .tactic-group{margin-bottom:18px;}
+  .tactic-label{
+    font-family:var(--mono); font-size:11px; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;
+  }
+  .rule-row{
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:10px 16px; background:var(--panel); border:1px solid var(--border);
+    border-radius:4px; margin-bottom:6px; font-size:13.5px;
+  }
+  .rule-row .rname{color:var(--text);}
+  .rule-row .rid{
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    white-space:nowrap; padding:2px 8px; border:1px solid var(--border); border-radius:3px;
+  }
+  .rules-link{
+    font-family:var(--mono); font-size:12px; color:var(--teal); text-decoration:none;
+    border-bottom:1px solid rgba(79,209,197,.35); display:inline-block; margin-top:10px;
+  }
+
   /* ---------- placeholder sections ---------- */
   .placeholder{
     background:var(--panel-2); border:1px dashed var(--border); border-radius:6px;
@@ -203,11 +224,8 @@
   </section>
 
   <section id="rules-section">
-    <div class="sec-head"><h2>Detection Rules</h2></div>
-    <div class="placeholder reveal">
-      <div class="ph-title">IN PROGRESS</div>
-      Sigma rules go here as they're written — one entry per rule with the trigger logic and a link to the raw rule file. First rule lands soon; check the activity feed above for the latest addition.
-    </div>
+    <div class="sec-head"><h2>Detection Rules</h2><span class="count" id="rules-count"></span></div>
+    <div id="rules-body"></div>
   </section>
 
   <section id="hunts-section">
@@ -259,6 +277,8 @@ const ACTIVITY = [
   // Newest first. type: "new" or "plan"
   { date:"2026-08-18", type:"new",  text:"Portfolio site launched — 4 case files live" },
   { date:"2026-08-18", type:"plan", text:"Next up: first Sigma detection rule" },
+  { date:"2026-08-25", type:"new", text:"5 Execution-tactic detection rules published — SOC-Detection-Lab repo live" },
+  { date:"2026-08-25", type:"plan", text:"Next up: Privilege Escalation, Discovery, and remaining tactics" },
 ];
 
 const CASES = [
@@ -324,6 +344,23 @@ const CASES = [
     link:"https://github.com/MIKEYSAN040"
   }
 ];
+
+const RULES = [
+  // Add new rules here as you complete and validate them. Group order below controls display order.
+  { tactic:"Execution", name:"Suspicious PowerShell Download and Execute", mitre:"T1059.001" },
+  { tactic:"Execution", name:"WMIC Remote XSL Execution", mitre:"T1220" },
+  { tactic:"Execution", name:"MSHTA Execution", mitre:"T1218.005" },
+  { tactic:"Execution", name:"Rundll32 Advpack RegisterOCX", mitre:"T1218.011" },
+  { tactic:"Execution", name:"Regsvr32 Scriptlet Execution", mitre:"T1218.010" },
+  { tactic:"Privilege Escalation", name:"Unquoted Service Path", mitre:"T1574.009" },
+  { tactic:"Discovery", name:"BloodHound Enumeration", mitre:"T1482" },
+];
+// Tactic headers always shown, even with no rules yet — fill these in as you complete each one.
+const RULE_TACTICS = [
+  "Execution", "Privilege Escalation", "Persistence", "Lateral Movement",
+  "Discovery", "Defense Evasion", "Credential Access", "Command and Control"
+];
+const RULES_REPO_URL = "https://github.com/MIKEYSAN040/SOC-Detection-Lab"; // update if your repo name differs
 
 const CERTS = [
   "Networking Basics — Cisco Networking Academy",
@@ -391,6 +428,28 @@ function renderCases(){
   `).join('');
 }
 
+function renderRules(){
+  const doneCount = RULES.length;
+  document.getElementById('rules-count').textContent = doneCount + ' rules published';
+  const groups = {};
+  RULES.forEach(r => { (groups[r.tactic] = groups[r.tactic] || []).push(r); });
+  const body = document.getElementById('rules-body');
+  body.innerHTML = RULE_TACTICS.map(tactic => {
+    const rules = groups[tactic] || [];
+    return `
+    <div class="tactic-group reveal">
+      <div class="tactic-label">${tactic}${rules.length ? '' : ' — coming soon'}</div>
+      ${rules.length ? rules.map(r => `
+        <div class="rule-row">
+          <span class="rname">${r.name}</span>
+          <span class="rid">${r.mitre}</span>
+        </div>
+      `).join('') : ''}
+    </div>
+  `;
+  }).join('') + `<a class="rules-link" href="${RULES_REPO_URL}" target="_blank">View all rules on GitHub →</a>`;
+}
+
 function renderCerts(){
   document.getElementById('certs').innerHTML = CERTS.map(c => `${c}<br>`).join('');
 }
@@ -401,6 +460,7 @@ function renderResume(){
 
 renderFeed();
 renderCases();
+renderRules();
 renderCerts();
 renderResume();
 
