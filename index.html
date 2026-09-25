@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Darshan K — Cloud Support Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F1720;
+    --surface: #16212C;
+    --surface-2: #1C2A37;
+    --line: #2A3A47;
+    --text: #E8ECEF;
+    --muted: #8FA0AC;
+    --amber: #E8A33D;
+    --teal: #4FA8A0;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Space Grotesk', 'Inter', sans-serif; margin: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* Hero */
+  header.hero {
+    padding: 88px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+  .role-tag {
+    font-size: 0.9rem;
+    color: var(--amber);
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  h1.name {
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02px;
+    line-height: 1.08;
+    max-width: 14ch;
+  }
+  .hero-sub {
+    margin-top: 20px;
+    max-width: 58ch;
+    color: var(--muted);
+    font-size: 1.08rem;
+  }
+  .hero-links {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+  }
+  .hero-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .hero-links a:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* Stats strip */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    padding: 30px 28px;
+    border-right: 1px solid var(--line);
+  }
+  .stat:last-child { border-right: none; }
+  .stat .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--amber);
+  }
+  .stat .label {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* Section heading */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 { font-size: 1.6rem; font-weight: 600; }
+  .section-head p { color: var(--muted); font-size: 0.95rem; margin: 0; }
+
+  /* Projects */
+  .project {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+  .project:first-of-type { border-top: none; }
+  .project .idx {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    color: var(--teal);
+    padding-top: 4px;
+  }
+  .project h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    max-width: 40ch;
+  }
+  .project .problem {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    max-width: 62ch;
+  }
+  .project .built {
+    margin-top: 10px;
+    font-size: 0.98rem;
+    max-width: 62ch;
+  }
+  .project ul.actions {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .project ul.actions li { margin-bottom: 4px; }
+  .project .result {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border-left: 2px solid var(--amber);
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+  .project .result strong { color: var(--amber); font-weight: 600; }
+  .project .meta {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  .tag {
+    padding: 3px 10px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--muted);
+  }
+  .skill-tag {
+    color: var(--teal);
+    border-color: var(--teal);
+  }
+  .repo-link {
+    margin-left: auto;
+    text-decoration: none;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .repo-link:hover { color: var(--amber); border-color: var(--amber); }
+
+  /* Skills */
+  .skill-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 28px;
+  }
+  .skill-group h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .skill-group .list { font-size: 0.98rem; line-height: 1.9; }
+
+  /* Background */
+  .bg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .bg-item .k { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+  .bg-item .v { font-size: 1rem; }
+
+  footer {
+    padding: 48px 0 72px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a { text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer a:hover { color: var(--amber); border-color: var(--amber); }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .project { grid-template-columns: 1fr; }
+    .project .idx { display: none; }
+    .bg-grid { grid-template-columns: 1fr; }
+    .repo-link { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="role-tag">Cloud Support Engineer</div>
+    <h1 class="name">Darshan K</h1>
+    <p class="hero-sub">I build and break AWS environments on purpose — deploying real infrastructure, then diagnosing exactly why it fails, so I can fix it fast when it matters. Five hands-on projects, 18+ documented troubleshooting scenarios, open to relocation anywhere in India.</p>
+    <div class="hero-links">
+      <a href="mailto:darshan331740@gmail.com">darshan331740@gmail.com</a>
+      <a href="https://linkedin.com/in/darshank404" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/MIKEYSAN040" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://medium.com/@darshan331740_89257" target="_blank" rel="noopener">Medium</a>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="num">5</div><div class="label">AWS projects, built & deployed</div></div>
+    <div class="stat"><div class="num">18+</div><div class="label">Troubleshooting scenarios documented</div></div>
+    <div class="stat"><div class="num">3</div><div class="label">API endpoints validated end-to-end</div></div>
+    <div class="stat"><div class="num">1mo</div><div class="label">Availability to join</div></div>
+  </div>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <p>Each one simulates a real support scenario — deploy it, break it, fix it, document it.</p>
+    </div>
+
+    <div class="project">
+      <div class="idx">01</div>
+      <div>
+        <h3>Production-Style LMS Deployment &amp; ECS Troubleshooting</h3>
+        <p class="problem">Cloud support teams need to diagnose containerized applications when health checks, networking, load balancing, or security configuration block users from reaching the app.</p>
+        <p class="built">Built and deployed a containerized Learning Management System on AWS, exposed through a load balancer, with availability validated end-to-end.</p>
+        <ul class="actions">
+          <li>Containerized the app with Docker and pushed the image to Amazon ECR</li>
+          <li>Deployed on ECS Fargate behind an Application Load Balancer</li>
+          <li>Configured VPC networking, security groups, task definitions, and port mappings</li>
+          <li>Investigated and resolved app, container, load-balancer, and network/security-group failures</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> 238 MB deployed image, deployment validated through health checks and live access, multiple failure scenarios diagnosed and resolved.</div>
+        <div class="meta">
+          <span class="tag">ECS Fargate</span><span class="tag">ECR</span><span class="tag">ALB</span><span class="tag">VPC</span><span class="tag">Docker</span>
+          <span class="tag skill-tag">Container & infrastructure troubleshooting</span>
+          <a class="repo-link" href="https://github.com/MIKEYSAN040" target="_blank" rel="noopener">View repo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx">02</div>
+      <div>
+        <h3>Automated Web Deployment &amp; CI/CD Troubleshooting</h3>
+        <p class="problem">Cloud support teams need to troubleshoot deployment failures when app servers, deployment agents, permissions, or network config block releases.</p>
+        <p class="built">Built an automated pipeline that delivers a web app from GitHub to an EC2 server and publishes it live through Apache.</p>
+        <ul class="actions">
+          <li>Configured EC2 web server on Amazon Linux with Apache</li>
+          <li>Built the pipeline with GitHub, CodePipeline, S3, and CodeDeploy</li>
+          <li>Set up CodeDeploy application, deployment group, IAM role, and artifacts</li>
+          <li>Resolved CodeDeploy agent, IAM permission, Apache service, and security-group issues</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> Live deployment through the automated pipeline, 4 documented troubleshooting scenarios resolved, verified with 6 deployment screenshots.</div>
+        <div class="meta">
+          <span class="tag">EC2</span><span class="tag">CodePipeline</span><span class="tag">CodeDeploy</span><span class="tag">S3</span><span class="tag">IAM</span>
+          <span class="tag skill-tag">CI/CD deployment troubleshooting</span>
+          <a class="repo-link" href="https://github.com/MIKEYSAN040/globalm-web" target="_blank" rel="noopener">View repo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx">03</div>
+      <div>
+        <h3>EC2 Monitoring &amp; Automated Incident Remediation</h3>
+        <p class="problem">Cloud support teams need to catch abnormal server resource usage and fix monitoring or automation failures before they hit availability.</p>
+        <p class="built">Built an EC2 monitoring environment that tracks system resources, triggers CloudWatch alarms, and uses Lambda to auto-remediate incidents.</p>
+        <ul class="actions">
+          <li>Configured Amazon Linux EC2 instance with the CloudWatch Agent</li>
+          <li>Implemented 3 custom metrics: CPU, memory, and swap usage</li>
+          <li>Set up CloudWatch alarms with Lambda-based auto-remediation</li>
+          <li>Debugged monitoring-agent failures, IAM permissions, and alarm/automation config</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> 3 custom metrics live, 5 documented troubleshooting scenarios resolved, remediation workflow verified under simulated high-load conditions.</div>
+        <div class="meta">
+          <span class="tag">EC2</span><span class="tag">CloudWatch</span><span class="tag">Lambda</span><span class="tag">IAM</span><span class="tag">Bash</span>
+          <span class="tag skill-tag">Monitoring & incident remediation</span>
+          <a class="repo-link" href="https://github.com/MIKEYSAN040/CloudGuard-EC2-Monitoring-AutoRemediation" target="_blank" rel="noopener">View repo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx">04</div>
+      <div>
+        <h3>Serverless Contact Workflow &amp; API Troubleshooting</h3>
+        <p class="problem">Cloud support teams need to troubleshoot serverless APIs when permissions, service config, or bad input break requests or downstream workflows.</p>
+        <p class="built">Built a serverless workflow that accepts API requests, stores contact data, and sends email notifications on success.</p>
+        <ul class="actions">
+          <li>Built the API workflow with API Gateway and Lambda</li>
+          <li>Configured DynamoDB for storage and SNS for notifications</li>
+          <li>Tested requests and downstream processing with Postman</li>
+          <li>Resolved IAM, SNS/DynamoDB config, and API payload issues</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> Full workflow validated end-to-end — API submission → database storage → email notification — with 4 documented scenarios resolved.</div>
+        <div class="meta">
+          <span class="tag">API Gateway</span><span class="tag">Lambda</span><span class="tag">DynamoDB</span><span class="tag">SNS</span>
+          <span class="tag skill-tag">Serverless & API support</span>
+          <a class="repo-link" href="https://github.com/MIKEYSAN040/MediaHub-Serverless-Contact-Workflow" target="_blank" rel="noopener">View repo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="idx">05</div>
+      <div>
+        <h3>Full-Stack Repair Application &amp; AWS Troubleshooting</h3>
+        <p class="problem">Cloud support teams need to troubleshoot multi-tier apps when frontend, backend, database, networking, or config failures break the workflow.</p>
+        <p class="built">Built and deployed a full-stack repair-request app: React frontend, Node.js/Express backend, MySQL database.</p>
+        <ul class="actions">
+          <li>Deployed React frontend on S3, Node.js/Express backend on EC2</li>
+          <li>Connected backend to Amazon RDS MySQL for persistent storage</li>
+          <li>Configured security groups, environment variables, CORS, and systemd</li>
+          <li>Resolved database connectivity, API config, CORS, and service-persistence issues</li>
+        </ul>
+        <div class="result"><strong>Result:</strong> 3 API endpoints validated (/, /health, /repair), 5 documented scenarios resolved, full frontend → backend → database workflow verified.</div>
+        <div class="meta">
+          <span class="tag">EC2</span><span class="tag">S3</span><span class="tag">RDS MySQL</span><span class="tag">React</span><span class="tag">Express</span>
+          <span class="tag skill-tag">Full-stack cloud troubleshooting</span>
+          <a class="repo-link" href="https://github.com/MIKEYSAN040/RepairShop-AWS-FullStack-Troubleshooting" target="_blank" rel="noopener">View repo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <h2>Skills &amp; Tools</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h4>Compute & Containers</h4>
+        <div class="list">EC2 · ECS Fargate · ECR · Docker · Lambda</div>
+      </div>
+      <div class="skill-group">
+        <h4>Networking & Delivery</h4>
+        <div class="list">VPC · Security Groups · Application Load Balancer · API Gateway</div>
+      </div>
+      <div class="skill-group">
+        <h4>Storage & Data</h4>
+        <div class="list">S3 · RDS (MySQL) · DynamoDB</div>
+      </div>
+      <div class="skill-group">
+        <h4>Ops & Automation</h4>
+        <div class="list">CloudWatch · CodePipeline · CodeDeploy · IAM · SNS · Bash</div>
+      </div>
+      <div class="skill-group">
+        <h4>App Development</h4>
+        <div class="list">React · Node.js · Express · Python · Postman</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="background">
+    <div class="section-head">
+      <h2>Background</h2>
+    </div>
+    <div class="bg-grid">
+      <div class="bg-item">
+        <div class="k">Education</div>
+        <div class="v">MCA — Bapuji Institute of Engineering & Technology, Davanagere</div>
+      </div>
+      <div class="bg-item">
+        <div class="k">Earlier Education</div>
+        <div class="v">B.Sc. Computer Science — M M Arts & Science College, Sirsi (2022–24)</div>
+      </div>
+      <div class="bg-item">
+        <div class="k">Target Role</div>
+        <div class="v">Cloud Support Engineer / Associate</div>
+      </div>
+      <div class="bg-item">
+        <div class="k">Location</div>
+        <div class="v">Open to any location in India — available within 1 month</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>darshan331740@gmail.com · <a href="https://linkedin.com/in/darshank404" target="_blank" rel="noopener">linkedin.com/in/darshank404</a> · <a href="https://github.com/MIKEYSAN040" target="_blank" rel="noopener">github.com/MIKEYSAN040</a></p>
+  </footer>
+</div>
+
+</body>
+</html>
