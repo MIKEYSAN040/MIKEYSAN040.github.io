@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Darshan K | Technical Support Engineer | Application Support</title>
+<meta name="description" content="Fresher Technical Support and Application Support engineer. Hands-on AWS troubleshooting projects with documented investigations.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f5f7; --surface:#ffffff; --ink:#13232c; --muted:#53666f; --line:#d5dee3;
+  --accent:#0b6e79; --accent-soft:#dff0f2;
+  --ok:#2b7a4b; --ok-soft:#e1f2e8; --warn:#9a6208; --warn-soft:#fbefd5;
+  --code:#0f2a33; --codeink:#cfe7ea;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1a20; --surface:#14252d; --ink:#e4eef1; --muted:#9bb0b8; --line:#26404a;
+    --accent:#4cc3cf; --accent-soft:#12363d;
+    --ok:#6fcf97; --ok-soft:#14352330; --warn:#f0b955; --warn-soft:#3a2e12;
+    --code:#08141a; --codeink:#cfe7ea; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1a20; --surface:#14252d; --ink:#e4eef1; --muted:#9bb0b8; --line:#26404a;
+  --accent:#4cc3cf; --accent-soft:#12363d;
+  --ok:#6fcf97; --ok-soft:#14352330; --warn:#f0b955; --warn-soft:#3a2e12;
+  --code:#08141a; --codeink:#cfe7ea; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+h1,h2,h3{line-height:1.2;margin:0}
+h2{font-size:clamp(1.6rem,3vw,2.1rem);letter-spacing:-.01em;margin-bottom:.4rem}
+h3{font-size:1.15rem}
+p{margin:.5rem 0}
+.sub{color:var(--muted);max-width:62ch;margin-bottom:1.8rem}
+section{padding:68px 0 10px}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-size:.86em}
+code{background:var(--accent-soft);padding:1px 6px;border-radius:4px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:18px;height:56px;overflow-x:auto;white-space:nowrap}
+nav b{margin-right:auto;font-weight:600}
+nav a{text-decoration:none;color:var(--muted);font-size:.93rem}
+nav a:hover{color:var(--ink)}
+#theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+/* hero: the troubleshooting loop is the memorable element */
+.hero{padding:72px 0 30px}
+.hero h1{font-size:clamp(2rem,5.4vw,3.4rem);letter-spacing:-.025em;max-width:18ch;font-weight:700}
+.hero .lead{font-size:1.12rem;color:var(--muted);max-width:60ch;margin:1.1rem 0 1.6rem}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:10px 18px;border-radius:8px;border:1px solid var(--accent);color:var(--accent);text-decoration:none;font-weight:500}
+.btn.primary{background:var(--accent);color:var(--bg)}
+.btn:hover{filter:brightness(1.08)}
+.loop{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:0;margin:44px 0 0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.loop li{counter-increment:s;padding:14px 14px 16px;border-right:1px solid var(--line);font-size:.9rem;font-weight:500;position:relative}
+.loop li:last-child{border-right:0}
+.loop li::before{content:counter(s);display:block;font:500 .78rem "IBM Plex Mono",monospace;color:var(--accent);margin-bottom:4px}
+.loop li{animation:lit 3.2s ease-out both;animation-delay:calc(var(--i)*.28s)}
+@keyframes lit{0%{background:var(--accent-soft)}100%{background:transparent}}
+.note{font-size:.88rem;color:var(--muted);margin-top:12px}
+
+/* cards */
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.panel h3{margin-bottom:6px}
+.panel ul{margin:.3rem 0 0;padding-left:1.1rem;color:var(--muted)}
+.panel li{margin:.15rem 0}
+
+/* case files */
+.case{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:12px;padding:24px 24px 18px;margin-bottom:22px}
+.case header{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:space-between;align-items:baseline}
+.case .cat{color:var(--muted);font-size:.9rem;margin:2px 0 10px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0;font-size:.83rem}
+.flow span{background:var(--accent-soft);border:1px solid var(--line);border-radius:6px;padding:3px 9px;font-family:"IBM Plex Mono",monospace}
+.flow i{color:var(--muted);font-style:normal}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tags span{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:1px 10px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 28px;margin-top:10px}
+.cols h4{margin:12px 0 2px;font-size:.95rem}
+.cols ul{margin:0;padding-left:1.1rem;color:var(--muted)}
+.badge{font-size:.78rem;font-weight:600;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}
+.badge.warn{background:var(--warn-soft);color:var(--warn)}
+details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--bg)}
+summary{cursor:pointer;padding:10px 14px;font-weight:500;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+details[open] summary{border-bottom:1px solid var(--line)}
+details .in{padding:6px 16px 12px}
+.in dl{margin:0;display:grid;grid-template-columns:110px 1fr;gap:6px 14px}
+.in dt{font-weight:600;color:var(--muted);font-size:.88rem}
+.in dd{margin:0}
+.in dd ul{margin:0;padding-left:1.1rem}
+pre{background:var(--code);color:var(--codeink);padding:12px 14px;border-radius:8px;overflow-x:auto;font:.82rem/1.5 "IBM Plex Mono",monospace;margin:8px 0}
+.support{background:var(--accent-soft);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:.92rem}
+.repo{display:inline-block;margin-top:10px;font-weight:500}
+.honest{border-left-color:var(--warn)}
+
+/* table */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.93rem}
+th,td{text-align:left;padding:10px 16px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+
+/* about + footer */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.tl{border-left:2px solid var(--line);padding-left:18px;margin:0}
+.tl h3{font-size:1.02rem}
+.tl small{color:var(--muted)}
+.tl ul{margin:.4rem 0 1rem;padding-left:1.1rem}
+footer{margin-top:70px;border-top:1px solid var(--line);padding:34px 0 50px;color:var(--muted)}
+footer a{margin-right:18px}
+@media (max-width:560px){.in dl{grid-template-columns:1fr}.case{padding:18px 16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.loop li{animation:none}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <b>Darshan K</b>
+    <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+    <button id="theme" type="button" aria-label="Toggle light and dark theme">Theme</button>
+  </div>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="wrap">
+    <h1>Technical Support Engineer | IT and Application Support</h1>
+    <p class="lead">MCA postgraduate with a Computer Science background. I build practical environments, investigate technical failures and document how I diagnosed and validated each fix. Open to L1 and entry-level support roles across India, with relocation possible and availability within one month.</p>
+    <div class="btns">
+      <a class="btn primary" href="#projects">View projects</a>
+      <a class="btn" href="https://github.com/MIKEYSAN040">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/darshank404">LinkedIn</a>
+      <a class="btn" href="#contact">Contact me</a>
+    </div>
+    <ol class="loop" aria-label="My troubleshooting approach">
+      <li style="--i:0">Understand the issue</li>
+      <li style="--i:1">Find the affected component</li>
+      <li style="--i:2">Check status and config</li>
+      <li style="--i:3">Review logs and connectivity</li>
+      <li style="--i:4">Identify the likely cause</li>
+      <li style="--i:5">Fix where confirmed</li>
+      <li style="--i:6">Validate and document</li>
+    </ol>
+    <p class="note">Every project below follows this loop. All projects are independent hands-on labs, not client or production work.</p>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About me</h2>
+    <p class="sub">I'm a fresher who has gone past theory: I configured the environments, hit real failures and worked through them with logs and service checks.</p>
+    <div class="grid g3">
+      <div class="panel"><h3>Background</h3><p>MCA, Bapuji Institute of Engineering and Technology, Davanagere. B.Sc Computer Science, M M Arts and Science College, Sirsi (2022 to 2024).</p></div>
+      <div class="panel"><h3>Fundamentals</h3><p>Windows and Linux command line, services and processes, users and permissions, TCP/IP, DNS, DHCP, HTTP and port connectivity.</p></div>
+      <div class="panel"><h3>Practical exposure</h3><p>AWS monitoring, deployments, container health, app-to-database connectivity, plus Splunk, Wireshark and firewall troubleshooting from my internship.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Troubleshooting case studies</h2>
+    <p class="sub">Five independent AWS projects. Each one is marked <span class="badge ok">Resolved</span> or <span class="badge warn">Investigated</span> so you can see exactly what I confirmed fixed and what I only diagnosed.</p>
+
+    <!-- CASE 1 -->
+    <article class="case" id="cloudguard">
+      <header><h3>CloudGuard: Diagnosing monitoring failures and automating EC2 recovery</h3></header>
+      <p class="cat">Infrastructure monitoring | Incident detection | Automated recovery</p>
+      <p>An EC2 monitoring setup that detects high CPU through a custom metric, raises a CloudWatch alarm and triggers a Lambda function to remediate. I built it to understand how a problem travels from detection to recovery.</p>
+      <div class="flow" aria-label="Architecture"><span>EC2</span><i>→</i><span>CloudWatch Agent</span><i>→</i><span>Custom CPU metric</span><i>→</i><span>CloudWatch Alarm</span><i>→</i><span>Lambda</span><i>→</i><span>EC2 reboot</span></div>
+      <div class="tags"><span>EC2</span><span>IAM</span><span>CloudWatch</span><span>CloudWatch Agent</span><span>Lambda</span><span>Python / Boto3</span><span>Linux logs</span></div>
+      <div class="cols">
+        <div><h4>What I implemented</h4><ul>
+          <li>Dev and prod EC2 instances with IAM roles for monitoring and remediation</li>
+          <li>CloudWatch Agent publishing the custom <code>cpu_usage_user</code> metric</li>
+          <li>Alarm: above 70%, one-minute average</li>
+          <li>Boto3 Lambda function wired to the alarm, tested end to end</li></ul></div>
+        <div><h4>Also documented</h4><ul>
+          <li>Lambda IAM denial involving <code>ec2:RebootInstances</code></li>
+          <li>Alarm not triggering as expected</li>
+          <li>Incorrect CloudWatch Agent configuration</li></ul></div>
+      </div>
+      <details open><summary><span class="badge ok">Resolved</span> Metrics stopped appearing, alarm in InsufficientData</summary>
+        <div class="in"><dl>
+          <dt>Problem</dt><dd>I stopped the CloudWatch Agent on purpose. Metrics stopped reaching CloudWatch and the alarm moved to InsufficientData.</dd>
+          <dt>Investigation</dt><dd>Checked the agent service state and logs with systemd and journalctl. The agent was no longer running.</dd>
+          <dt>Resolution</dt><dd>Restarted the agent.</dd>
+          <dt>Validation</dt><dd>Confirmed metric collection resumed and monitoring recovered.</dd></dl>
+<pre>systemctl status amazon-cloudwatch-agent
+journalctl -u amazon-cloudwatch-agent --no-pager | tail</pre></div></details>
+      <details><summary><span class="badge ok">Tested</span> High CPU detection and automated recovery</summary>
+        <div class="in"><dl>
+          <dt>Investigation</dt><dd>Watched the custom CPU metric, set the alarm threshold and checked the alarm-to-Lambda link.</dd>
+          <dt>Outcome</dt><dd>Lambda invokes the EC2 remediation action. I tested the alarm and remediation workflow.</dd></dl></div></details>
+      <div class="support"><b>Support skills shown:</b> Linux service checks, log analysis, IAM permission failures, alert thresholds, following an incident from detection to recovery.</div>
+      <a class="repo" href="https://github.com/MIKEYSAN040/CloudGuard-EC2-Monitoring-AutoRemediation">View repository</a>
+      <!-- Add real screenshots here: architecture, metric + alarm, agent failure, recovered metrics, Lambda workflow -->
+    </article>
+
+    <!-- CASE 2 -->
+    <article class="case" id="repairshop">
+      <header><h3>RepairShop: Frontend, backend and database connectivity</h3></header>
+      <p class="cat">Application support | Database connectivity | Port and network troubleshooting</p>
+      <p>A full-stack repair-shop app built to learn how a frontend, an API and a database talk to each other across AWS services.</p>
+      <div class="flow" aria-label="Architecture"><span>React + Vite on S3</span><i>→</i><span>Node/Express on EC2</span><i>→</i><span>MySQL on RDS</span></div>
+      <div class="tags"><span>EC2</span><span>RDS MySQL</span><span>S3</span><span>Node.js</span><span>Express</span><span>React</span><span>CORS</span><span>HTTP</span></div>
+      <div class="cols">
+        <div><h4>What I implemented</h4><ul>
+          <li>Express backend listening on <code>0.0.0.0:3000</code></li>
+          <li>Endpoints: <code>GET /</code>, <code>GET /health</code>, <code>POST /repair</code></li>
+          <li>RDS database <code>repair_shop</code> reached from EC2 on port 3306</li>
+          <li>React frontend hosted as an S3 static site</li></ul></div>
+        <div><h4>Validated</h4><ul>
+          <li>Backend health endpoint</li>
+          <li>EC2 to RDS database connection</li></ul></div>
+      </div>
+      <details open><summary><span class="badge warn">Investigated</span> ERR_CONNECTION_REFUSED from the S3 frontend</summary>
+        <div class="in"><dl>
+          <dt>Problem</dt><dd>Submitting a repair request from the S3-hosted frontend failed with <code>ERR_CONNECTION_REFUSED</code> against the EC2 backend on port 3000.</dd>
+          <dt>Investigation</dt><dd><ul><li>Confirmed the Node process was listening on <code>0.0.0.0:3000</code></li><li>Reviewed how the frontend calls the API</li><li>Considered backend availability, port access and cross-origin rules</li></ul></dd>
+          <dt>Work done</dt><dd>Installed and started configuring CORS for frontend and backend communication.</dd>
+          <dt>Status</dt><dd>I have not claimed a final fix for the form submission path. I list it as an investigation.</dd></dl></div></details>
+      <div class="support"><b>Support skills shown:</b> application-layer troubleshooting, port checks, HTTP API basics, database connectivity, multi-tier architecture.</div>
+      <a class="repo" href="https://github.com/MIKEYSAN040/RepairShop-AWS-FullStack-Troubleshooting">View repository</a>
+      <!-- Add screenshots: architecture, health endpoint, DB connection, the connection-refused error -->
+    </article>
+
+    <!-- CASE 3 -->
+    <article class="case" id="globalm">
+      <header><h3>GlobalM: Linux deployment failure and web availability</h3></header>
+      <p class="cat">Application deployment | Linux administration | Deployment troubleshooting</p>
+      <p>A website deployed to EC2 through a GitHub-based pipeline. The useful part was finding why a deployment lifecycle step failed.</p>
+      <div class="flow" aria-label="Architecture"><span>GitHub</span><i>→</i><span>CodePipeline</span><i>→</i><span>S3 artifact</span><i>→</i><span>CodeDeploy</span><i>→</i><span>EC2 + Apache</span><i>→</i><span>Live site</span></div>
+      <div class="tags"><span>EC2</span><span>CodePipeline</span><span>CodeDeploy</span><span>S3</span><span>Amazon Linux 2023</span><span>Apache</span><span>Security Groups</span></div>
+      <details open><summary><span class="badge ok">Resolved</span> CodeDeploy AfterInstall failed with exit code 127</summary>
+        <div class="in"><dl>
+          <dt>Problem</dt><dd>The AfterInstall lifecycle stage failed with exit code <code>127</code> (command not found).</dd>
+          <dt>Investigation</dt><dd>Read the install script. It mixed <code>dnf install httpd</code> with leftover Ubuntu commands (<code>apt-get</code> / <code>apache2</code>), which do not exist on Amazon Linux 2023.</dd>
+          <dt>Resolution</dt><dd>Corrected the script to use the package manager for the target OS.</dd>
+          <dt>Validation</dt><dd>Checked web server config and files in <code>/var/www/html/</code>, then confirmed the live website loaded.</dd>
+          <dt>Also checked</dt><dd><ul><li>CodeDeploy agent status</li><li>A region mismatch: I was first looking in the wrong AWS region; resources were in <code>ap-southeast-2</code></li></ul></dd></dl>
+<pre>sudo systemctl status codedeploy-agent
+ls -l /var/www/html/</pre></div></details>
+      <div class="support"><b>Support skills shown:</b> reading and fixing scripts, OS compatibility awareness, deployment agents and lifecycle events, web server basics, availability validation.</div>
+      <a class="repo" href="https://github.com/MIKEYSAN040/globalm-web">View repository</a>
+      <!-- Add screenshots: pipeline run, lifecycle failure, corrected script, live site -->
+    </article>
+
+    <!-- CASE 4 -->
+    <article class="case honest" id="lms">
+      <header><h3>LMS: Containerised application health and availability</h3></header>
+      <p class="cat">Application support | Containers | Load balancing</p>
+      <p>A containerised web app on ECS Fargate behind an Application Load Balancer, used to understand how a request reaches a running container and how health is checked.</p>
+      <div class="flow" aria-label="Architecture"><span>Docker image</span><i>→</i><span>ECR</span><i>→</i><span>ECS Fargate</span><i>→</i><span>ALB</span><i>→</i><span>User</span></div>
+      <div class="tags"><span>Docker</span><span>ECR</span><span>ECS Fargate</span><span>ALB</span><span>VPC</span><span>Security Groups</span><span>CloudWatch Logs</span></div>
+      <div class="cols"><div><h4>Setup</h4><ul>
+        <li>ECR repo <code>lms</code>, image tag <code>v1</code>, region <code>ap-southeast-2</code></li>
+        <li>Task definition <code>lms-task</code>, Fargate, <code>awsvpc</code> networking, container port 80</li>
+        <li>Load balancer <code>lms-alb</code> with <code>/health</code> endpoint</li></ul></div>
+        <div><h4>Validated</h4><ul><li>HTTP request via the ALB returned <code>200 OK</code> from nginx</li><li>Healthy tasks showed ALB health checks returning 200</li></ul></div></div>
+      <details open><summary><span class="badge warn">Investigated</span> Task revision lms-task:4 kept stopping</summary>
+        <div class="in"><dl>
+          <dt>Problem</dt><dd>After updating to <code>lms-task:4</code>, tasks repeatedly stopped with "Essential container in task exited". Revision 3 stayed running.</dd>
+          <dt>Investigation</dt><dd>Checked ECS task status and CloudWatch logs. I did not locate the failing task's logs; the logs I found belonged to healthy tasks.</dd>
+          <dt>Status</dt><dd>Not claimed as fixed. It is a documented investigation.</dd></dl></div></details>
+      <div class="support"><b>Support skills shown:</b> reading task and service status, health checks, basic HTTP troubleshooting, load balancer to backend flow.</div>
+      <!-- Add repo link and screenshots: ECR image, task definition, ALB, /health, stopped task -->
+    </article>
+
+    <!-- CASE 5 -->
+    <article class="case" id="mediahub">
+      <header><h3>MediaHub: Serverless contact workflow</h3></header>
+      <p class="cat">Supplementary | Event-driven workflows | Notifications</p>
+      <p>A serverless contact workflow that stores records and sends notifications. I include it to show I understand how application events move between services.</p>
+      <div class="flow" aria-label="Architecture"><span>Contact request</span><i>→</i><span>Lambda</span><i>→</i><span>DynamoDB</span><i>→</i><span>SNS</span><i>→</i><span>Notification</span></div>
+      <div class="tags"><span>Lambda</span><span>DynamoDB</span><span>SNS</span><span>Event-driven design</span></div>
+      <p class="note">Configured an SNS topic and a DynamoDB table. Check the repository for the exact trigger sequence.</p>
+      <a class="repo" href="https://github.com/MIKEYSAN040/MediaHub-Serverless-Contact-Workflow">View repository</a>
+    </article>
+
+    <h3 style="margin:34px 0 10px">Which project shows which support skill</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Support responsibility</th><th>Strongest evidence</th></tr></thead>
+      <tbody>
+        <tr><td>Infrastructure monitoring and agent troubleshooting</td><td>CloudGuard</td></tr>
+        <tr><td>Linux service and log investigation</td><td>CloudGuard, GlobalM</td></tr>
+        <tr><td>Deployment failure investigation, web server setup</td><td>GlobalM</td></tr>
+        <tr><td>Application health checks and availability</td><td>LMS, GlobalM</td></tr>
+        <tr><td>Frontend, backend and database connectivity</td><td>RepairShop</td></tr>
+        <tr><td>Network port investigation</td><td>RepairShop</td></tr>
+        <tr><td>Event-driven application workflows</td><td>MediaHub</td></tr>
+        <tr><td>Log investigation, packet analysis, firewall exposure</td><td>Internship</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Technical skills</h2>
+    <p class="sub">Fundamentals and hands-on project exposure, not production-level expertise.</p>
+    <div class="grid g3">
+      <div class="panel"><h3>Systems</h3><ul><li>Windows fundamentals</li><li>Linux command line</li><li>Services and processes</li><li>Users and permissions</li><li>System logs</li></ul></div>
+      <div class="panel"><h3>Networking</h3><ul><li>TCP/IP, DNS, DHCP</li><li>IP addressing, LAN/WAN</li><li>HTTP and port connectivity</li><li>Firewall fundamentals</li><li>Wireshark packet analysis</li></ul></div>
+      <div class="panel"><h3>Application and infrastructure</h3><ul><li>Application troubleshooting</li><li>Frontend/backend connectivity</li><li>Database connectivity</li><li>Health checks, load balancers</li><li>Deployment troubleshooting</li></ul></div>
+      <div class="panel"><h3>Monitoring</h3><ul><li>CloudWatch, Agent, Alarms</li><li>Splunk, ELK Stack</li><li>Log analysis</li><li>Incident investigation</li><li>Root-cause analysis basics</li></ul></div>
+      <div class="panel"><h3>AWS</h3><ul><li>EC2, IAM, VPC, Security Groups</li><li>S3, RDS, DynamoDB, SNS</li><li>ECS Fargate, ECR, ALB</li><li>Lambda</li><li>CodePipeline, CodeDeploy</li></ul></div>
+      <div class="panel"><h3>Professional</h3><ul><li>Structured troubleshooting</li><li>Technical documentation</li><li>Written communication</li><li>Attention to detail</li><li>Independent learning</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience, education and certifications</h2>
+    <div class="two" style="margin-top:22px">
+      <div>
+        <div class="tl">
+          <h3>Intern, Abeyaantrix Edusoft LLP</h3><small>February 2026 to May 2026</small>
+          <ul>
+            <li>Gained practical exposure to security-log investigation using Splunk, network packet analysis using Wireshark and firewall troubleshooting, building an understanding of system activity, network communication and security-related issues.</li>
+            <li>Worked with log-collection validation and technical investigation, developing structured analytical, troubleshooting and technical documentation skills.</li>
+          </ul>
+          <h3>MCA</h3><small>Bapuji Institute of Engineering and Technology, Davanagere</small>
+          <p></p>
+          <h3>B.Sc Computer Science</h3><small>M M Arts and Science College, Sirsi, 2022 to 2024</small>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Certifications and courses</h3>
+        <ul>
+          <li>AWS IAM Foundations, Amazon Web Services (July 2026)</li>
+          <li>Cisco Networking Basics</li>
+          <li>Fortinet Technical Introduction to Cybersecurity 3.0</li>
+          <li>Fortinet Threat Landscape 3.0</li>
+          <li>Microsoft Security Essentials (LinkedIn Learning)</li>
+          <li>VTU Cloud Computing</li>
+          <li>VTU Ethical Hacking</li>
+        </ul>
+        <p class="note">In progress: CompTIA Security+.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="sub">Hiring for a Technical Support, Application Support or IT Operations role? I would like to hear about it.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:darshan331740@gmail.com">darshan331740@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/darshank404">LinkedIn</a>
+      <a class="btn" href="https://github.com/MIKEYSAN040">GitHub</a>
+      <a class="btn" href="https://medium.com/@darshan331740_89257">Medium</a>
+      <a class="btn" href="https://tryhackme.com/p/Darshan331740">TryHackMe</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>All projects are independent hands-on labs on my own AWS account. Some resources have since been removed, so live links may not be running. Repositories and screenshots show the work.</p>
+    <p>&copy; <span id="yr">2026</span> Darshan K</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var root = document.documentElement, btn = document.getElementById('theme');
+  try { var s = localStorage.getItem('theme'); if (s) root.setAttribute('data-theme', s); } catch(e){}
+  btn.addEventListener('click', function(){
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
